@@ -1,3 +1,12 @@
+use bevy::prelude::*;
+
+fn startup() {
+    println!("Starting The Sapphire Star ...");
+}
+
 fn main() {
-    println!("Hello, world!");
+    App::build()
+        .add_plugins(DefaultPlugins)
+        .add_startup_system(startup.system())
+        .run();
 }
