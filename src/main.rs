@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
-mod startup;
+pub mod camera;
+pub mod startup;
 
 fn main() {
     App::build()
