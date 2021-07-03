@@ -1,7 +1,5 @@
 use bevy::prelude::*;
-
-pub mod camera;
-pub mod startup;
+use the_sapphire_star::startup;
 
 fn main() {
     App::build()
