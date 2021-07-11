@@ -78,6 +78,26 @@ impl Temperature {
         Temperature::rankine(rankine)
     }
 
+    #[allow(non_snake_case)]
+    pub fn C_range(celsius_range: std::ops::Range<f32>) -> std::ops::Range<Temperature> {
+        Temperature::C(celsius_range.start) .. Temperature::C(celsius_range.end)
+    }
+
+    #[allow(non_snake_case)]
+    pub fn F_range(fahrenheit_range: std::ops::Range<f32>) -> std::ops::Range<Temperature> {
+        Temperature::F(fahrenheit_range.start) .. Temperature::F(fahrenheit_range.end)
+    }
+
+    #[allow(non_snake_case)]
+    pub fn K_range(kelvin_range: std::ops::Range<f32>) -> std::ops::Range<Temperature> {
+        Temperature::K(kelvin_range.start) .. Temperature::K(kelvin_range.end)
+    }
+
+    #[allow(non_snake_case)]
+    pub fn R_range(rankine_range: std::ops::Range<f32>) -> std::ops::Range<Temperature> {
+        Temperature::R(rankine_range.start) .. Temperature::R(rankine_range.end)
+    }
+
     pub fn to_celsius(self) -> Temperature {
         Temperature {
             kelvin: self.kelvin,
