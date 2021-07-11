@@ -15,6 +15,11 @@ pub struct Temperature {
     scale: Scale
 }
 
+pub const ABSOLUTE_ZERO:           Temperature = Temperature { kelvin:   0.0,    scale: Scale::Kelvin };
+pub const FREEZING_POINT_OF_BRINE: Temperature = Temperature { kelvin: 255.37,   scale: Scale::Kelvin };
+pub const FREEZING_POINT_OF_WATER: Temperature = Temperature { kelvin: 273.15,   scale: Scale::Kelvin };
+pub const BOILING_POINT_OF_WATER:  Temperature = Temperature { kelvin: 373.1339, scale: Scale::Kelvin };
+
 impl Temperature {
     pub fn new(kelvin: f32) -> Temperature {
         Temperature::kelvin(kelvin)
