@@ -78,4 +78,17 @@ impl SpectralType {
             _               => mass::MIN .. mass::MAX  // We default to just "some mass" since we don't know here (even potentially negative mass).
         }
     }
+
+    pub fn main_sequence_fraction(self) -> f32 {
+        match self {
+            SpectralType::O => 0.00_00003,
+            SpectralType::B => 0.00_13,
+            SpectralType::A => 0.00_6,
+            SpectralType::F => 0.03,
+            SpectralType::G => 0.07_6,
+            SpectralType::K => 0.12_1,
+            SpectralType::M => 0.76_45, // Most main sequence stars are M-types.
+            _               => 0.0 // Not main sequence.
+        }
+    }
 }
