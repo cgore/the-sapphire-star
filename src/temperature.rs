@@ -30,13 +30,6 @@ impl Temperature {
         Temperature::kelvin(kelvin)
     }
 
-    pub fn kelvin(kelvin: f32) -> Temperature {
-        Temperature {
-            kelvin: kelvin,
-            scale: Scale::Kelvin
-        }
-    }
-
     pub fn celsius(celsius: f32) -> Temperature {
         Temperature {
             kelvin: celsius + 273.15,
@@ -51,6 +44,13 @@ impl Temperature {
         }
     }
 
+    pub fn kelvin(kelvin: f32) -> Temperature {
+        Temperature {
+            kelvin: kelvin,
+            scale: Scale::Kelvin
+        }
+    }
+
     pub fn rankine(rankine: f32) -> Temperature {
         Temperature {
             kelvin: (rankine + 459.67),
@@ -58,11 +58,24 @@ impl Temperature {
         }
     }
 
-    pub fn to_kelvin(self) -> Temperature {
-        Temperature {
-            kelvin: self.kelvin,
-            scale: Scale::Kelvin
-        }
+    #[allow(non_snake_case)]
+    pub fn C(celsius: f32) -> Temperature {
+        Temperature::celsius(celsius)
+    }
+
+    #[allow(non_snake_case)]
+    pub fn F(fahrenheit: f32) -> Temperature {
+        Temperature::fahrenheit(fahrenheit)
+    }
+
+    #[allow(non_snake_case)]
+    pub fn K(kelvin: f32) -> Temperature {
+        Temperature::kelvin(kelvin)
+    }
+
+    #[allow(non_snake_case)]
+    pub fn R(rankine: f32) -> Temperature {
+        Temperature::rankine(rankine)
     }
 
     pub fn to_celsius(self) -> Temperature {
@@ -76,6 +89,13 @@ impl Temperature {
         Temperature {
             kelvin: self.kelvin,
             scale: Scale::Fahrenheit
+        }
+    }
+
+    pub fn to_kelvin(self) -> Temperature {
+        Temperature {
+            kelvin: self.kelvin,
+            scale: Scale::Kelvin
         }
     }
 
