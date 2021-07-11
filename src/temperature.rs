@@ -1,3 +1,5 @@
+use std::convert::{TryFrom, Into};
+
 #[derive(PartialEq)]
 enum Scale {
     Celsius,
@@ -13,6 +15,10 @@ pub struct Temperature {
 }
 
 impl Temperature {
+    pub fn new(kelvin: f32) -> Temperature {
+        Temperature::kelvin(kelvin)
+    }
+
     pub fn kelvin(kelvin: f32) -> Temperature {
         Temperature {
             kelvin: kelvin,
@@ -66,6 +72,28 @@ impl Temperature {
         Temperature {
             kelvin: self.kelvin,
             scale: Scale::Rankine
+        }
+    }
+}
+
+impl TryFrom<f32> for Temperature {
+    type Error = ();
+    fn try_from(value: f32) -> Result<Self, Self::Error> {
+        if value >= 0.0 {
+            Ok(Temperature::kelvin(value))
+        } else {
+            Err(())
+        }
+    }
+}
+
+impl Into<f32> for Temperature {
+    fn into(self) -> f32 {
+        match self.scale {
+            Scale::Celsius    => self.kelvin - 273.15,
+            Scale::Fahrenheit => self.kelvin * (9.0/5.0) - 459.67,
+            Scale::Kelvin     => self.kelvin,
+            Scale::Rankine    => self.kelvin * (9.0/5.0)
         }
     }
 }
