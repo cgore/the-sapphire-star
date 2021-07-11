@@ -20,6 +20,11 @@ pub const FREEZING_POINT_OF_BRINE: Temperature = Temperature { kelvin: 255.37,  
 pub const FREEZING_POINT_OF_WATER: Temperature = Temperature { kelvin: 273.15,   scale: Scale::Kelvin };
 pub const BOILING_POINT_OF_WATER:  Temperature = Temperature { kelvin: 373.1339, scale: Scale::Kelvin };
 
+/// This is the lowest temperature we can represent.
+pub const MIN: Temperature = ABSOLUTE_ZERO;
+/// This is the highest temperature we can represent.
+pub const MAX: Temperature = Temperature { kelvin: std::f32::MAX, scale: Scale::Kelvin };
+
 impl Temperature {
     pub fn new(kelvin: f32) -> Temperature {
         Temperature::kelvin(kelvin)
