@@ -41,30 +41,30 @@ impl Temperature {
         }
     }
 
-    pub fn to_kelvin(temperature: Temperature) -> Temperature {
+    pub fn to_kelvin(self) -> Temperature {
         Temperature {
-            kelvin: temperature.kelvin,
+            kelvin: self.kelvin,
             scale: Scale::Kelvin
         }
     }
 
-    pub fn to_celsius(temperature: Temperature) -> Temperature {
+    pub fn to_celsius(self) -> Temperature {
         Temperature {
-            kelvin: temperature.kelvin,
+            kelvin: self.kelvin,
             scale: Scale::Celsius
         }
     }
 
-    pub fn to_fahrenheit(temperature: Temperature) -> Temperature {
+    pub fn to_fahrenheit(self) -> Temperature {
         Temperature {
-            kelvin: temperature.kelvin,
+            kelvin: self.kelvin,
             scale: Scale::Fahrenheit
         }
     }
 
-    pub fn to_rankine(temperature: Temperature) -> Temperature {
+    pub fn to_rankine(self) -> Temperature {
         Temperature {
-            kelvin: temperature.kelvin,
+            kelvin: self.kelvin,
             scale: Scale::Rankine
         }
     }
