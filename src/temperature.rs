@@ -1,6 +1,7 @@
 use std::convert::{TryFrom, Into};
+use std::fmt;
 
-#[derive(PartialEq)]
+#[derive(Clone, Copy, PartialEq)]
 enum Scale {
     Celsius,
     Fahrenheit,
@@ -8,7 +9,7 @@ enum Scale {
     Rankine
 }
 
-#[derive(PartialEq)]
+#[derive(Clone, Copy, PartialEq)]
 pub struct Temperature {
     kelvin: f32,
     scale: Scale
@@ -94,6 +95,18 @@ impl Into<f32> for Temperature {
             Scale::Fahrenheit => self.kelvin * (9.0/5.0) - 459.67,
             Scale::Kelvin     => self.kelvin,
             Scale::Rankine    => self.kelvin * (9.0/5.0)
+        }
+    }
+}
+
+impl fmt::Display for Temperature {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let value: f32 = Temperature::into(*self);
+        match self.scale {
+            Scale::Celsius    => write!(f, "{} °C", value),
+            Scale::Fahrenheit => write!(f, "{} °F", value),
+            Scale::Kelvin     => write!(f, "{} K",  value),
+            Scale::Rankine    => write!(f, "{} °R", value)
         }
     }
 }
