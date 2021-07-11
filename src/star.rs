@@ -15,6 +15,44 @@ pub enum SpectralType {
 }
 
 impl SpectralType {
+    pub fn is_main_sequence(self) -> bool {
+        match self {
+            SpectralType::O |
+            SpectralType::B |
+            SpectralType::A |
+            SpectralType::F |
+            SpectralType::G |
+            SpectralType::K |
+            SpectralType::M => true,
+            _ => false
+        }
+    }
+
+    pub fn is_white_dwarf(self) -> bool {
+        match self {
+            SpectralType::DA  |
+            SpectralType::DB  |
+            SpectralType::DO  |
+            SpectralType::DQ  |
+            SpectralType::DZ  |
+            SpectralType::DC  |
+            SpectralType::DX  |
+            SpectralType::DAB |
+            SpectralType::DAO |
+            SpectralType::DAZ |
+            SpectralType::DBZ => true,
+            _ => false
+        }
+    }
+
+    pub fn is_non_stellar(self) -> bool {
+        match self {
+            SpectralType::P |
+            SpectralType::Q => true,
+            _ => false
+        }
+    }
+
     pub fn effective_temperature(self) -> Range<Temperature> {
         match self {
             SpectralType::O => Temperature::K(      30_000.0) .. temperature::MAX,
