@@ -1,4 +1,6 @@
 use std::ops::Range;
+use super::mass;
+use super::mass::Mass;
 use super::temperature;
 use super::temperature::Temperature;
 
@@ -24,5 +26,18 @@ impl SpectralType {
             SpectralType::M => Temperature::K_range( 2_400.0  ..  3_700.0),
             _               => temperature::MIN .. temperature::MAX // We default to just "some temperature" since we don't know here.
          }
+    }
+
+    pub fn main_sequence_mass(self) -> Range<Mass> {
+        match self {
+            SpectralType::O => Mass::Msol( 16.0) .. mass::MAX,
+            SpectralType::B => Mass::range( 2.1  .. 16.0,  mass::Scale::SolarMass),
+            SpectralType::A => Mass::range( 1.4  ..  2.1,  mass::Scale::SolarMass),
+            SpectralType::F => Mass::range( 1.04 ..  1.4,  mass::Scale::SolarMass),
+            SpectralType::G => Mass::range( 0.8  ..  1.04, mass::Scale::SolarMass),
+            SpectralType::K => Mass::range( 0.45 ..  0.8,  mass::Scale::SolarMass),
+            SpectralType::M => Mass::range( 0.08 ..  0.45, mass::Scale::SolarMass),
+            _               => mass::MIN .. mass::MAX  // We default to just "some mass" since we don't know here (even potentially negative mass).
+        }
     }
 }

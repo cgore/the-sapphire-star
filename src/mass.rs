@@ -27,9 +27,25 @@ const EARTH_MASSES_TO_GRAMS: f64 = 5.9722e24 * 1_000.0;
 const JOVIAN_MASSES_TO_GRAMS: f64 = 1.89813e27 * 1_000.0;
 const SOLAR_MASSES_TO_GRAMS: f64 = 1.98847e30 * 1_000.0;
 
+pub const MIN: Mass = Mass { grams: std::f64::MIN, scale: Scale::Gram };
+pub const MAX: Mass = Mass { grams: std::f64::MAX, scale: Scale::Gram };
+
 impl Mass {
     pub fn new(grams: f64) -> Mass {
         Mass::grams(grams)
+    }
+
+    pub fn scaled(mass: f64, scale: Scale) -> Mass {
+        match scale {
+            Scale::Gram        => Mass::grams(mass),
+            Scale::Kilogram    => Mass::kilograms(mass),
+            Scale::Ounce       => Mass::ounces(mass),
+            Scale::Pound       => Mass::pounds(mass),
+            Scale::LunarMass   => Mass::lunar_masses(mass),
+            Scale::EarthMass   => Mass::earth_masses(mass),
+            Scale::JovianMass  => Mass::jovian_masses(mass),
+            Scale::SolarMass   => Mass::solar_masses(mass),
+        }
     }
 
     pub fn grams(grams: f64) -> Mass {
@@ -122,6 +138,10 @@ impl Mass {
     #[allow(non_snake_case)]
     pub fn Msol(solar_masses: f64) -> Mass {
         Mass::solar_masses(solar_masses)
+    }
+
+    pub fn range(range: std::ops::Range<f64>, scale: Scale) -> std::ops::Range<Mass> {
+        Mass::scaled(range.start, scale) .. Mass::scaled(range.end, scale)
     }
 }
 
