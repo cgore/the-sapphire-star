@@ -2,7 +2,7 @@ use std::convert::{TryFrom, Into};
 use std::fmt;
 
 #[derive(Clone, Copy, PartialEq)]
-enum Scale {
+pub enum Scale {
     Celsius,
     Fahrenheit,
     Kelvin,
