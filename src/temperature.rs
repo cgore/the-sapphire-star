@@ -1,3 +1,4 @@
+use std::default::Default;
 use std::convert::{TryFrom, Into};
 use std::fmt;
 
@@ -9,7 +10,13 @@ pub enum Scale {
     Rankine
 }
 
-#[derive(Clone, Copy, PartialEq)]
+impl Default for Scale {
+    fn default() -> Scale {
+        Scale::Kelvin
+    }
+}
+
+#[derive(Clone, Copy, Default, PartialEq)]
 pub struct Temperature {
     kelvin: f32,
     scale: Scale
