@@ -1,6 +1,8 @@
 use std::ops::Range;
 use super::mass;
 use super::mass::Mass;
+use super::power;
+use super::power::Power;
 use super::temperature;
 use super::temperature::Temperature;
 
@@ -76,6 +78,19 @@ impl SpectralType {
             SpectralType::K => Mass::range( 0.45 ..  0.8,  mass::Scale::SolarMass),
             SpectralType::M => Mass::range( 0.08 ..  0.45, mass::Scale::SolarMass),
             _               => mass::MIN .. mass::MAX  // We default to just "some mass" since we don't know here (even potentially negative mass).
+        }
+    }
+
+    pub fn main_sequence_luminosity(self) -> Range<Power> {
+        match self {
+            SpectralType::O => Power::Lsol( 30_000.0) .. power::MAX,
+            SpectralType::B => Power::range(    25.0  .. 30_000.0,  power::Scale::SolarLuminosity),
+            SpectralType::A => Power::range(     5.0  ..     25.0,  power::Scale::SolarLuminosity),
+            SpectralType::F => Power::range(     1.5  ..      5.0,  power::Scale::SolarLuminosity),
+            SpectralType::G => Power::range(     0.6  ..      1.5,  power::Scale::SolarLuminosity),
+            SpectralType::K => Power::range(     0.08 ..      0.6,  power::Scale::SolarLuminosity),
+            SpectralType::M => Power::range(     0.0  ..      0.08, power::Scale::SolarLuminosity),
+            _               => power::ZERO            .. power::MAX // We default to just "some power" since we don't know here.
         }
     }
 

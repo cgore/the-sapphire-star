@@ -162,7 +162,7 @@ impl Into<f64> for Mass {
             Scale::LunarMass   => self.grams * LUNAR_MASSES_TO_GRAMS,
             Scale::EarthMass   => self.grams * EARTH_MASSES_TO_GRAMS,
             Scale::JovianMass  => self.grams * JOVIAN_MASSES_TO_GRAMS,
-            Scale::SolarMass   => self.grams * SOLAR_MASSES_TO_GRAMS 
+            Scale::SolarMass   => self.grams * SOLAR_MASSES_TO_GRAMS
         }
     }
 }
