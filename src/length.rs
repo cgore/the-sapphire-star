@@ -5,7 +5,7 @@ pub enum Scale {
     Millimeter, Centimeter, Meter, Kilometer, Megameter,
     Inch, Hand, Foot, Cubit, Yard, Mile, NauticalMile,
     EarthRadius, SolarRadius, AstronomicalUnit, Parsec, Kiloparsec, Megaparsec,
-    LightSecond, LightMinute, LightDay, LightWeek, LightYear
+    LightSecond, LightMinute, LightHour, LightDay, LightWeek, LightYear
 }
 
 impl Default for Scale {
@@ -19,7 +19,7 @@ pub const METERS_TO_MILLIMETERS:    f64 = 1.0 / MILLIMETERS_TO_METERS;
 pub const CENTIMETERS_TO_METERS:    f64 =               100.0;
 pub const METERS_TO_CENTIMETERS:    f64 = 1.0 / CENTIMETERS_TO_METERS;
 pub const KILOMETERS_TO_METERS:     f64 =             1_000.0;
-pub const MEGMETERS_TO_METERS:      f64 =         1_000_000.0;
+pub const MEGAMETERS_TO_METERS:     f64 =         1_000_000.0;
 pub const INCHES_TO_METERS:         f64 =                 0.0254;
 pub const HANDS_TO_METERS:          f64 =                 0.1016;
 pub const FEET_TO_METERS:           f64 =                 0.3048;
@@ -51,4 +51,33 @@ pub struct Length {
 }
 
 impl Length {
+    pub fn scaled(length: f64, scale: Scale) -> Length {
+        let length_in_meters = match scale {
+            Scale::Millimeter       => length / MILLIMETERS_TO_METERS,
+            Scale::Centimeter       => length / CENTIMETERS_TO_METERS,
+            Scale::Meter            => length,
+            Scale::Kilometer        => length * KILOMETERS_TO_METERS,
+            Scale::Megameter        => length * MEGAMETERS_TO_METERS,
+            Scale::Inch             => length * INCHES_TO_METERS,
+            Scale::Hand             => length * HANDS_TO_METERS,
+            Scale::Foot             => length * FEET_TO_METERS,
+            Scale::Cubit            => length * CUBITS_TO_METERS,
+            Scale::Yard             => length * YARDS_TO_METERS,
+            Scale::Mile             => length * MILES_TO_METERS,
+            Scale::NauticalMile     => length * NAUTICAL_MILES_TO_METERS,
+            Scale::EarthRadius      => length * EARTH_RADII_TO_METERS,
+            Scale::SolarRadius      => length * SOLAR_RADII_TO_METERS,
+            Scale::AstronomicalUnit => length * AU_TO_METERS,
+            Scale::Parsec           => length * PARSECS_TO_METERS,
+            Scale::Kiloparsec       => length * KILOPARSECS_TO_METERS,
+            Scale::Megaparsec       => length * MEGAPARSECS_TO_METERS,
+            Scale::LightSecond      => length * LIGHT_SECONDS_TO_METERS,
+            Scale::LightMinute      => length * LIGHT_MINUTES_TO_METERS,
+            Scale::LightHour        => length * LIGHT_HOURS_TO_METERS,
+            Scale::LightDay         => length * LIGHT_DAYS_TO_METERS,
+            Scale::LightWeek        => length * LIGHT_WEEKS_TO_METERS,
+            Scale::LightYear        => length * LIGHT_YEARS_TO_METERS,
+        };
+        Length { meters: length_in_meters, scale: scale }
+    }
 }
