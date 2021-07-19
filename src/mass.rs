@@ -1,3 +1,4 @@
+use std::default::Default;
 use std::convert::{From, Into};
 use std::fmt;
 
@@ -8,7 +9,13 @@ pub enum Scale {
     LunarMass, EarthMass, JovianMass, SolarMass
 }
 
-#[derive(Clone, Copy, PartialEq)]
+impl Default for Scale {
+    fn default() -> Scale {
+        Scale::Gram
+    }
+}
+
+#[derive(Clone, Copy, Default, PartialEq)]
 pub struct Mass {
     /// We see that f64's maximum is approximately 1.8*10^308.
     /// If we use this for grams, we convert into 9.05*10^274 solar masses.
