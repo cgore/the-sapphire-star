@@ -25,14 +25,14 @@ pub struct Mass {
     scale: Scale
 }
 
-const GRAMS_TO_KILOGRAMS: f64 = 1_000.0;
-const KILOGRAMS_TO_GRAMS: f64 = 1.0 / GRAMS_TO_KILOGRAMS;
-const OUNCES_TO_GRAMS: f64 = 28.34952;
-const POUNDS_TO_GRAMS: f64 = 453.5924;
-const LUNAR_MASSES_TO_GRAMS: f64 = 7.342e22 * 1_000.0;
-const EARTH_MASSES_TO_GRAMS: f64 = 5.9722e24 * 1_000.0;
-const JOVIAN_MASSES_TO_GRAMS: f64 = 1.89813e27 * 1_000.0;
-const SOLAR_MASSES_TO_GRAMS: f64 = 1.98847e30 * 1_000.0;
+pub const GRAMS_TO_KILOGRAMS:     f64 = 1_000.0;
+pub const KILOGRAMS_TO_GRAMS:     f64 = 1.0 / GRAMS_TO_KILOGRAMS;
+pub const OUNCES_TO_GRAMS:        f64 = 28.34952;
+pub const POUNDS_TO_GRAMS:        f64 = 453.5924;
+pub const LUNAR_MASSES_TO_GRAMS:  f64 = 7.342e22 * 1_000.0;
+pub const EARTH_MASSES_TO_GRAMS:  f64 = 5.9722e24 * 1_000.0;
+pub const JOVIAN_MASSES_TO_GRAMS: f64 = 1.89813e27 * 1_000.0;
+pub const SOLAR_MASSES_TO_GRAMS:  f64 = 1.98847e30 * 1_000.0;
 
 pub const MIN: Mass = Mass { grams: std::f64::MIN, scale: Scale::Gram };
 pub const MAX: Mass = Mass { grams: std::f64::MAX, scale: Scale::Gram };
