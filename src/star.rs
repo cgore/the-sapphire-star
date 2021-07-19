@@ -1,4 +1,6 @@
 use std::ops::Range;
+use super::length;
+use super::length::Length;
 use super::mass;
 use super::mass::Mass;
 use super::power;
@@ -78,6 +80,19 @@ impl SpectralType {
             SpectralType::K => Mass::range( 0.45 ..  0.8,  mass::Scale::SolarMass),
             SpectralType::M => Mass::range( 0.08 ..  0.45, mass::Scale::SolarMass),
             _               => mass::MIN .. mass::MAX  // We default to just "some mass" since we don't know here (even potentially negative mass).
+        }
+    }
+
+    pub fn main_sequence_radius(self) -> Range<Length> {
+        match self {
+            SpectralType::O => Length::Rsol( 10.0)  .. length::MAX,
+            SpectralType::B => Length::range( 2.0   ..             10.0,  length::Scale::SolarRadius),
+            SpectralType::A => Length::range( 1.4   ..              2.0,  length::Scale::SolarRadius),
+            SpectralType::F => Length::range( 1.15  ..              1.4,  length::Scale::SolarRadius),
+            SpectralType::G => Length::range( 0.9   ..              1.15, length::Scale::SolarRadius),
+            SpectralType::K => Length::range( 0.6   ..              0.9,  length::Scale::SolarRadius),
+            SpectralType::M => length::ZERO         .. Length::Rsol(0.6),
+            _               => length::ZERO         .. length::MAX // We default to just "some radius" since we don't know here.
         }
     }
 

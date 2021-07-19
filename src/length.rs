@@ -50,6 +50,9 @@ pub struct Length {
     scale: Scale
 }
 
+pub const ZERO: Length = Length { meters: 0.0,           scale: Scale::Meter };
+pub const MAX:  Length = Length { meters: std::f64::MAX, scale: Scale::Meter };
+
 impl Length {
     pub fn scaled(length: f64, scale: Scale) -> Length {
         let length_in_meters = match scale {
@@ -79,5 +82,18 @@ impl Length {
             Scale::LightYear        => length * LIGHT_YEARS_TO_METERS,
         };
         Length { meters: length_in_meters, scale: scale }
+    }
+
+    pub fn solar_radii(solar_radii: f64) -> Length {
+        Length::scaled(solar_radii, Scale::SolarRadius)
+    }
+
+    #[allow(non_snake_case)]
+    pub fn Rsol(solar_radii: f64) -> Length {
+        Length::solar_radii(solar_radii)
+    }
+
+    pub fn range(range: std::ops::Range<f64>, scale: Scale) -> std::ops::Range<Length> {
+        Length::scaled(range.start, scale) .. Length::scaled(range.end, scale)
     }
 }
