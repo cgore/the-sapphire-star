@@ -8,6 +8,19 @@ use super::power::Power;
 use super::temperature;
 use super::temperature::Temperature;
 
+pub enum LuminosityClass {
+    IaPlus, // 0 or Ia+, hypergiants or extremely luminous supergiants.
+    Ia,     // luminous supergiants.
+    Iab,    // intermediate-size luminous supergiants.
+    Ib,     // less luminous supergiants.
+    II,     // bright giants.
+    III,    // normal giants.
+    IV,     // subgiants.
+    V,      // main-sequence stars (dwarfs).
+    VI,     // sd (prefix) or VI, subdwarfs.
+    VII     // D (prefix) or VII, white dwarfs.
+}
+
 pub enum SpectralType {
     O, B, A, F, G, K, M,                            // Main sequence stars.
     WR,                                             // Wolf-Rayet stars.
